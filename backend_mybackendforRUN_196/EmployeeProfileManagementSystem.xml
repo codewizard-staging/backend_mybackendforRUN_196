@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+    <edmx:DataServices>
+        <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Model">
+            <EntityType HasStream="false" Name="Organization">
+                <Key>
+                    <PropertyRef Name="OrganizationID"/>
+                </Key>
+                <Property Name="OrganizationID" Type="Edm.Int32" isUnique="false"/>
+                <Property Name="OrganizationName" Type="Edm.String" isUnique="false"/>
+                <Property Name="OrganzationMissionVision" Type="Edm.String" isUnique="false"/>
+                <Property Name="OrganizationValues" Type="Edm.String" isUnique="false"/>
+                <Property Name="OrgBranch" Type="Model.OrgBranch" isUnique="false"/>
+                <NavigationProperty Name="Employees" Type="Model.EmlpoyeeProfile"/>
+            </EntityType>
+            <EntityType HasStream="false" Name="EmployeePersonalInfo">
+                <Key>
+                    <PropertyRef Name="Id"/>
+                </Key>
+                <Property Name="EmpFullName" Type="Edm.String" isUnique="false"/>
+                <Property Name="EmpGender" Type="Edm.String" isUnique="false"/>
+                <Property Name="EmpDOB" Type="Edm.DateTimeOffset" isUnique="false"/>
+                <Property Name="EmpPhoneNo" Type="Edm.Int64" isUnique="false"/>
+                <Property Name="EmpEmailID" Type="Edm.String" isUnique="false"/>
+                <Property Name="EmpLaguagesKnown" Type="Edm.String" isUnique="false"/>
+                <Property Name="EmployeePersonalID" Type="Edm.Int32" isUnique="false"/>
+                <Property Name="PrevCompany" Type="Edm.String" isUnique="false"/>
+                <Property Name="JobTtile" Type="Edm.String" isUnique="false"/>
+                <Property Name="WorkLocation" Type="Edm.String" isUnique="false"/>
+                <Property Name="FromDate" Type="Edm.DateTimeOffset" isUnique="false"/>
+                <Property Name="ToDate" Type="Edm.DateTimeOffset" isUnique="false"/>
+                <Property Name="EmpType" Type="Edm.String" isUnique="false"/>
+                <Property Name="RecentGrad" Type="Edm.String" isUnique="false"/>
+                <Property Name="CertificationsVerified" Type="Edm.Boolean" isUnique="false"/>
+                <Property Name="EmpBloodgroup" Type="Edm.String" isUnique="false"/>
+                <Property Name="EmpEmergencycontact" Type="Edm.Int64" isUnique="false"/>
+                <Property Name="Relation" Type="Edm.String" isUnique="false"/>
+                <Property Name="PocName" Type="Edm.String" isUnique="false"/>
+                <Property Name="Id" Type="Edm.Int32" isUnique="false"/>
+            </EntityType>
+            <EntityType HasStream="false" Name="EmlpoyeeProfile">
+                <Key>
+                    <PropertyRef Name="EmpID"/>
+                </Key>
+                <Property Name="EmpID" Type="Edm.Int32" isUnique="false"/>
+                <Property Name="EmpName" Type="Edm.String" isUnique="false"/>
+                <Property Name="EmpEmailID" Type="Edm.String" isUnique="false"/>
+                <Property Name="EmpPhoto" Type="Edm.String" isUnique="false"/>
+                <Property Name="JobTitle" Type="Edm.String" isUnique="false"/>
+                <Property Name="DomainVertical" Type="Model.OrgDept" isUnique="false"/>
+                <Property Name="ReportingManager" Type="Edm.String" isUnique="false"/>
+                <Property Name="EmpType" Type="Model.EmploymentType" isUnique="false"/>
+                <Property Name="WorkLocation" Type="Model.OrgBranch" isUnique="false"/>
+                <Property Name="PackageOffered" Type="Edm.Int32" isUnique="false"/>
+                <Property Name="EmpContactNum" Type="Edm.Int64" isUnique="false"/>
+                <Property Name="Level" Type="Edm.String" isUnique="false"/>
+                <Property Name="Domain" Type="Edm.String" isUnique="false"/>
+                <NavigationProperty Name="EmpInfo" Type="Model.EmployeePersonalInfo"/>
+            </EntityType>
+            <EntityContainer Name="Container">
+                <EntitySet Name="Organizations" EntityType="Model.Organization">
+                    <NavigationPropertyBinding Path="Employees" Target="EmlpoyeeProfiles"/>
+                </EntitySet>
+                <EntitySet Name="EmployeePersonalInfoes" EntityType="Model.EmployeePersonalInfo"/>
+                <EntitySet Name="EmlpoyeeProfiles" EntityType="Model.EmlpoyeeProfile">
+                    <NavigationPropertyBinding Path="EmpInfo" Target="EmployeePersonalInfoes"/>
+                </EntitySet>
+            </EntityContainer>
+            <EnumType Name="EmploymentType">
+                <Member Name="fullTime" Value="0"/>
+                <Member Name="contract" Value="1"/>
+                <Member Name="partners" Value="2"/>
+                <Member Name="interns" Value="3"/>
+            </EnumType>
+            <EnumType Name="OrgDept">
+                <Member Name="Developement" Value="0"/>
+                <Member Name="InfraInternal" Value="1"/>
+                <Member Name="Delivery" Value="2"/>
+            </EnumType>
+            <EnumType Name="OrgBranch">
+                <Member Name="India" Value="0"/>
+                <Member Name="UK" Value="1"/>
+                <Member Name="Germany" Value="2"/>
+                <Member Name="USA" Value="3"/>
+            </EnumType>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>
